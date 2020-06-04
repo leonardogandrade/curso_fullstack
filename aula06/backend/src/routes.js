@@ -6,4 +6,7 @@ routes.post('/users',UserController.persistUser);
 routes.get('/users',UserController.listUsers);
 routes.get('/userGit',UserController.getUserGit);
 
+//Login
+routes.post('/login/:username',UserController.login);
+
 module.exports = routes;

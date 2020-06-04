@@ -3,6 +3,18 @@ const axios = require('axios');
 const User = mongoose.model('User');
 
 module.exports = {
+    //Login
+    async login(req,res){
+        const username = await req.params.username;
+        const validation = await User.find({login : username});
+        
+        if(validation.length === 0){
+            res.json({'msg' : 0})
+        }else{
+            res.json({'msg' : 1})
+        }
+    },
+
     //Persistir no banco usuários do Git
     async persistUser(req,res){
         const {userGit} = req.body;
@@ -42,7 +54,6 @@ module.exports = {
                 "msg" : "usuário muito novo"
             })
         }
-
     }
 
     //Novo backend origen:[lat,lon] destino:[lat,lon] => distancia
