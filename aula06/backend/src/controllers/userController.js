@@ -3,6 +3,13 @@ const axios = require('axios');
 const User = mongoose.model('User');
 
 module.exports = {
+    //List by ID
+    async listByID(req,res){
+        const userID = await req.params.id;
+        const result = await User.findById(userID);
+        res.json(result);
+    },
+
     //Login
     async login(req,res){
         const username = await req.params.username;
@@ -14,6 +21,8 @@ module.exports = {
             res.json({'msg' : 1})
         }
     },
+
+
 
     //Persistir no banco usuários do Git
     async persistUser(req,res){
@@ -38,7 +47,8 @@ module.exports = {
     async getUserGit(req,res){
         const response = await axios.get('https://api.github.com/users/leonardogandrade');
         res.json(response.data);
-    }, 
+    },
+
     //Persistir no banco usuário do Git se criado antes de 2020
     async gitUser2020(req,res){
         const response = await axios.get('https://api.github.com/users/leonardogandrade');
