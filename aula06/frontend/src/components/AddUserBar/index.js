@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import './index.css';
 
@@ -7,7 +8,10 @@ export default class AddUserBar extends Component{
         return(
             <div className='addUserBar-container'>
                 <span>Cadastro de desenvolvedor</span>
-                <button type='submit'>Cadastrar</button>
+                
+                <Link to='/adduser'>
+                    <button type='submit'>Cadastrar</button>
+                </Link>
 
                 <span>Informações</span>
                 <p>

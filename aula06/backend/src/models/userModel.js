@@ -7,7 +7,10 @@ const userSchema = mongoose.Schema({
     company : String,
     public_repos : Number,
     followers : Number,
-    bio : String
+    bio : String,
+    sexo : String,
+    experiencia : String,
+    linguagem : String
 },{
     timestamps : true
 });
