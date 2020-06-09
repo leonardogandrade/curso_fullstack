@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import jobIcon from '../../img/job.png';
 
 import api from '../../services/api';
+import io from 'socket.io-client';
 
 import './index.css';
 
@@ -15,7 +16,15 @@ export default class JobsCard extends Component{
         this.setState({jobs : response.data});
     }
 
+    registerSocket(){
+        const socket = io('https://fullstackbackend.herokuapp.com/');
+        socket.on('newjob', newjob =>{            
+            this.setState({jobs : [newjob,...this.state.jobs] });
+        });
+    }
+
     componentDidMount(){
+        this.registerSocket();
         this.loadData();
     }
 
@@ -24,7 +33,7 @@ export default class JobsCard extends Component{
             <div className='main-container'>
                 {
                     this.state.jobs.map(job =>(
-                        <div className='jobs-container'>
+                        <div className='jobs-container' key={job._id}>
                             <img src={jobIcon} alt=''/>
                             <div>
                                 <span>{job.description}</span>
